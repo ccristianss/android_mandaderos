@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Manders</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Ingresar</string>
+    <string name="register">Registrarse</string>
+    <string name="msj_empty_email">Por favor digite su Correo</string>
+    <string name="msj_empty_name">Complete su nombre de usuario</string>
+    <string name="msj_empty_lastname">Complete su apellido</string>
+    <string name="msj_empty_phone">Faltó el teléfono</string>
+    <string name="name">Su nombre</string>
+    <string name="save">Guardar</string>
+    <string name="lastname">Su apellido</string>
+    <string name="phone">Su número de Teléfono</string>
+</resources>
