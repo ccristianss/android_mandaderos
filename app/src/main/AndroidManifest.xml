@@ -15,6 +15,24 @@
         android:theme="@style/Theme.Manders"
         tools:targetApi="31">
         <activity
+            android:name=".ui.UpdateDocumentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.UpdateVehicleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.UpdateProfileManderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AcceptRequetsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainManderActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.DetailRequestActivity"
             android:exported="false" />
         <activity
