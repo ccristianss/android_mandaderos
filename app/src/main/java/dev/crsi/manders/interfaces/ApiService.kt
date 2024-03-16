@@ -16,13 +16,13 @@ interface ApiService {
     @POST("login/")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 
-    @POST("accounts/")
+    @POST("account/")
     fun createAccount(@Body request: AccountRequest): Call<AccountResponse>
 
-    @GET("users/{id}")
+    @GET("user/{id}")
     fun getUserById(@Path("id") id: Int): Call<UserResponse>
 
-    @POST("users/")
+    @POST("user/")
     fun createUser(@Body request: UserRequest): Call<UserResponse>
 
 }
