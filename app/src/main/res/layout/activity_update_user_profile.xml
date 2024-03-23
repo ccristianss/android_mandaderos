@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="62dp"
+        android:maxLength="10"
         android:ems="10"
         android:inputType="phone"
         android:text="Numero de celular"
