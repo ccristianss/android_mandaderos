@@ -3,11 +3,11 @@ package dev.crsi.manders.ui
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.crsi.manders.R
+import dev.crsi.manders.databinding.ActivityUpdateUserProfileBinding
 import dev.crsi.manders.interfaces.ApiService
 import dev.crsi.manders.models.UserRequest
 import dev.crsi.manders.models.UserResponse
@@ -19,61 +19,96 @@ import retrofit2.Response
 
 class UpdateUserProfileActivity : AppCompatActivity() {
 
-    private lateinit var editTextName: EditText
-    private lateinit var editTextLastName: EditText
-    private lateinit var editTextPhone: EditText
-    private lateinit var buttonSave: Button
+    private lateinit var binding: ActivityUpdateUserProfileBinding
     private lateinit var sharedPref: SharedPreferenceManager
     private val apiService = ApiClient.retrofit.create(ApiService::class.java)
-
+    private var id_user = 0
+    private var id_account = 0
+    private var name = ""
+    private var lastname = ""
+    private var phone = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_update_user_profile)
-
-        editTextName = findViewById(R.id.editTextName)
-        editTextLastName = findViewById(R.id.editTextLastname)
-        editTextPhone = findViewById(R.id.editTextPhone)
-        buttonSave = findViewById(R.id.button)
+        binding = ActivityUpdateUserProfileBinding.inflate(LayoutInflater.from(this))
+        sharedPref = SharedPreferenceManager(this)
+        setContentView(binding.root)
 
         initUI()
 
 
-        private fun initUI() {
-            getPrefs()
-            setListener()
-        }
+    }
 
-        private fun getPrefs() {
-            id_account = sharedPref.getPref("id_account", 0) as Int
-            id_user = sharedPref.getPref("id_user", 0) as Int
-            if (id_user != 0) {
-                GotoMain()
+    private fun initUI() {
+        getPrefs()
+        getDataUsers()
+        setListener()
+    }
+
+    private fun getDataUsers() {
+        apiService.getUsers().enqueue(object : Callback<List<UserResponse>> {
+            override fun onResponse(
+                call: Call<List<UserResponse>>,
+                response: Response<List<UserResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val usersList = response.body()!!
+                    val filteredUsers = usersList.filter { it.account_id_account == id_account }
+
+                    filteredUsers.forEach { user ->
+                        name = user.name_user
+                        lastname = user.lastname_user
+                        phone = user.phone_user
+                        savePrefers(user.id_user)
+                    }
+                    getPrefs()
+                    setData()
+                }
             }
-        }
 
+            override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
 
-        buttonSave.setOnClickListener {
+                Toast.makeText(
+                    this@UpdateUserProfileActivity,
+                    "Error: ${t.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        })
+    }
+
+    private fun setData() {
+        binding.editTextPhone.setText(phone)
+        binding.editTextLastname.setText(lastname)
+        binding.editTextName.setText(name)
+    }
+
+    private fun setListener() {
+        binding.button.setOnClickListener {
             if (validateForm()) {
-                val name_user = editTextName.text.toString()
-                val lastname_user = editTextLastName.text.toString()
-                val phone_user = editTextPhone.text.toString()
-                val userRequest = UserRequest(name_user, lastname_user, phone_user)
+                val name_user = binding.editTextName.text.toString()
+                val lastname_user = binding.editTextLastname.text.toString()
+                val phone_user = binding.editTextPhone.text.toString()
+                val userRequest = UserRequest(id_account, name_user, lastname_user, phone_user)
                 updateUserProfile(userRequest)
             }
         }
     }
 
-    private fun initUI() {
-        TODO("Not yet implemented")
+    private fun getPrefs() {
+        id_account = sharedPref.getPref("id_account", 0) as Int
+        Log.d("getPrefs", "id_account:$id_account")
+        id_user = sharedPref.getPref("id_user", 0) as Int
+        Log.d("getPrefs", "id_user:$id_user")
     }
 
     private fun updateUserProfile(userRequest: UserRequest) {
         Log.d("userRequest", "userRequest: $userRequest")
 
-        apiService.updateUser(id, userRequest).enqueue(object : Callback<UserResponse> {
+        apiService.updateUser(id_user, userRequest).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
-                    savePrefs(response.body()?.id_user, userRequest.name_user, userRequest.lastname_user, userRequest.phone_user)
+                    savePrefers(response.body()?.id_user)
                     goToMain()
                 } else {
                     Toast.makeText(
@@ -101,35 +136,30 @@ class UpdateUserProfileActivity : AppCompatActivity() {
     }
 
     private fun validateForm(): Boolean {
-        return when {
-            editTextName.text.toString().isEmpty() -> {
-                Toast.makeText(this, getString(R.string.msj_empty_name), Toast.LENGTH_SHORT).show()
-                editTextName.requestFocus()
-                false
-            }
-            editTextLastName.text.toString().isEmpty() -> {
-                Toast.makeText(this, getString(R.string.msj_empty_lastname), Toast.LENGTH_SHORT).show()
-                editTextLastName.requestFocus()
-                false
-            }
-            editTextPhone.text.toString().isEmpty() -> {
-                Toast.makeText(this, getString(R.string.msj_empty_phone), Toast.LENGTH_SHORT).show()
-                editTextPhone.requestFocus()
-                false
-            }
-            else -> true
+        return if (binding.editTextName.text.toString().isEmpty()) {
+            Toast.makeText(this, getString(R.string.msj_empty_name), Toast.LENGTH_SHORT).show()
+            binding.editTextName.requestFocus()
+            false
+        } else if (binding.editTextLastname.text.toString().isEmpty()) {
+            Toast.makeText(this, getString(R.string.msj_empty_lastname), Toast.LENGTH_SHORT).show()
+            binding.editTextLastname.requestFocus()
+            false
+        } else if (binding.editTextPhone.text.toString().isEmpty()) {
+            Toast.makeText(this, getString(R.string.msj_empty_phone), Toast.LENGTH_SHORT).show()
+            binding.editTextPhone.requestFocus()
+            false
+        } else {
+            true
         }
     }
 
-    private fun savePrefs(idUser: Int?, name: String, lastName: String, phone: String) {
-        val sharedPref = getSharedPreferences("nombre_de_tu_archivo_de_preferencias", MODE_PRIVATE)
-
-        idUser?.let {
-            sharedPref.edit().putInt("id_user", it).apply()
+    fun savePrefers(idUser: Int?) {
+        if (idUser != null) {
+            sharedPref.savePref("id_user", idUser)
         }
-        sharedPref.edit().putString("name_user", name).apply()
-        sharedPref.edit().putString("lastname_user", lastName).apply()
-        sharedPref.edit().putString("phone_user", phone).apply()
+        sharedPref.savePref("name_user", name)
+        sharedPref.savePref("lastname_user", lastname)
+        sharedPref.savePref("phone_user", phone)
     }
 }
 

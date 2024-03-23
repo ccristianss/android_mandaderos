@@ -46,5 +46,8 @@ interface ApiService {
     @GET("service/")
     fun getService(): Call<List<ServiceResponse>>
 
+    @PUT("user/{id}/")
+    fun updateUser(@Path("id") id: Int, @Body userRequest: UserRequest): Call<UserResponse>
+
 
 }
