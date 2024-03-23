@@ -3,6 +3,7 @@ package dev.crsi.manders.interfaces
 import dev.crsi.manders.models.AccountPasswordChangeRequest
 import dev.crsi.manders.models.AccountRequest
 import dev.crsi.manders.models.AccountResponse
+import dev.crsi.manders.models.DetailRequestResponse
 import dev.crsi.manders.models.LoginRequest
 import dev.crsi.manders.models.LoginResponse
 import dev.crsi.manders.models.UserRequest
@@ -32,5 +33,11 @@ interface ApiService {
 
     @POST("user/")
     fun createUser(@Body request: UserRequest): Call<UserResponse>
+
+
+    //si es un listado total la respuesta o Callbal debe ser de tipo List o Array O MutabeList
+    @GET("request/")
+    fun getRequest(): Call<List<DetailRequestResponse>>
+
 
 }
