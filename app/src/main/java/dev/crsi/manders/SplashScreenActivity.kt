@@ -12,6 +12,7 @@ import dev.crsi.manders.databinding.ActivitySplashScreenBinding
 import dev.crsi.manders.providers.SharedPreferenceManager
 import dev.crsi.manders.ui.LoginActivity
 import dev.crsi.manders.ui.RegisterActivity
+import dev.crsi.manders.ui.UpdateUserProfileActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -27,7 +28,11 @@ class SplashScreenActivity : AppCompatActivity() {
         sharedPref = SharedPreferenceManager(this)
         setContentView(binding.root)
 
-        initUI()
+        //initUI()
+
+        val intent = Intent(this, UpdateUserProfileActivity::class.java)
+        finish()
+        startActivity(intent)
     }
 
     private fun initUI() {
