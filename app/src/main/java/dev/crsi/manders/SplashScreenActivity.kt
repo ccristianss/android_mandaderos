@@ -29,12 +29,12 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        initUI()
         /*
-       initUI()
-         */
+
         val intent = Intent(this, MainManderActivity::class.java)
         finish()
-        startActivity(intent)
+        startActivity(intent)*/
     }
 
     private fun initUI() {
