@@ -6,6 +6,7 @@ import dev.crsi.manders.models.AccountResponse
 import dev.crsi.manders.models.DetailRequestResponse
 import dev.crsi.manders.models.LoginRequest
 import dev.crsi.manders.models.LoginResponse
+import dev.crsi.manders.models.ServiceResponse
 import dev.crsi.manders.models.UserRequest
 import dev.crsi.manders.models.UserResponse
 import retrofit2.Call
@@ -28,6 +29,9 @@ interface ApiService {
         @Body request: AccountPasswordChangeRequest
     ): Call<AccountResponse>
 
+    @GET("user/")
+    fun getUsers(): Call<List<UserResponse>>
+
     @GET("user/{id}")
     fun getUserById(@Path("id") id: Int): Call<UserResponse>
 
@@ -38,6 +42,9 @@ interface ApiService {
     //si es un listado total la respuesta o Callbal debe ser de tipo List o Array O MutabeList
     @GET("request/")
     fun getRequest(): Call<List<DetailRequestResponse>>
+
+    @GET("service/")
+    fun getService(): Call<List<ServiceResponse>>
 
 
 }
