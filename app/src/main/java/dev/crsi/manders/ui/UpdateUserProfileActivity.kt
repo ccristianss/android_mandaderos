@@ -51,6 +51,7 @@ class UpdateUserProfileActivity : AppCompatActivity() {
             }
         }
 
+
         buttonSave.setOnClickListener {
             if (validateForm()) {
                 val name_user = editTextName.text.toString()
@@ -62,10 +63,14 @@ class UpdateUserProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun initUI() {
+        TODO("Not yet implemented")
+    }
+
     private fun updateUserProfile(userRequest: UserRequest) {
         Log.d("userRequest", "userRequest: $userRequest")
 
-        apiService.createUser(userRequest).enqueue(object : Callback<UserResponse> {
+        apiService.updateUser(id, userRequest).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
                     savePrefs(response.body()?.id_user, userRequest.name_user, userRequest.lastname_user, userRequest.phone_user)

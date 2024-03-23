@@ -2,16 +2,15 @@ package dev.crsi.manders
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import dev.crsi.manders.databinding.ActivitySplashScreenBinding
 import dev.crsi.manders.providers.SharedPreferenceManager
 import dev.crsi.manders.ui.LoginActivity
-import dev.crsi.manders.ui.MainActivity
 import dev.crsi.manders.ui.RegisterActivity
 
 @SuppressLint("CustomSplashScreen")
@@ -38,6 +37,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun getPrefs() {
         id_account = sharedPref.getPref("id_account", 0) as Int
+        Log.d("getPrefs", "id_account:$id_account")
     }
 
     private fun setNextActivity() {
