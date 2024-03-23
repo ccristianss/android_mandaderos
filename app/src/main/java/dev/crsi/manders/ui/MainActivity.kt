@@ -1,12 +1,16 @@
 package dev.crsi.manders.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dev.crsi.manders.R
 import dev.crsi.manders.adapters.RequestAdapter
 import dev.crsi.manders.adapters.ServicesAdapter
 import dev.crsi.manders.databinding.ActivityMainBinding
@@ -48,6 +52,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         getPrefs()
+        binding.btnMenu.setOnClickListener { view ->
+            showPopupMenu(view)
+        }
+
     }
 
     private fun getPrefs() {
@@ -121,4 +129,36 @@ class MainActivity : AppCompatActivity() {
         servicesAdapter = ServicesAdapter(servicesList)
         rvServices.adapter = servicesAdapter
     }
+
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(this, view)
+        popupMenu.inflate(R.menu.menu_main)
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.edit_profile -> {
+                    val intent = Intent(this , UpdateUserProfileActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.change_password -> {
+                    val intent = Intent(this , UpdatePasswordActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.mander -> {
+                    val intent = Intent(this , MainManderActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
+    }
+
+
+
+
 }
