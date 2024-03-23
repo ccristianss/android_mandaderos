@@ -25,4 +25,8 @@
     <string name="save">Guardar</string>
     <string name="lastname">Su apellido</string>
     <string name="phone">Su número de Teléfono</string>
+    <string name="actualizar_mandado">ACTUALIZAR MANDADO</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="mandados">MANDADOS</string>
 </resources>

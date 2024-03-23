@@ -32,4 +32,17 @@ class SharedPreferenceManager (context: Context) {
             else -> throw  IllegalArgumentException("No es posible obtener este tipo de dato")
         }!!
     }
+
+    fun removePref(key:String){
+       val editor= sharedPreferences.edit()
+        editor.remove(key)
+        editor.apply()
+    }
+
+    fun removeAll(){
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+    }
+
 }

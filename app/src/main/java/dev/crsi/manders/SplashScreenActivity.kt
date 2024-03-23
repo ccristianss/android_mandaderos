@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import android.widget.Toast
 import dev.crsi.manders.databinding.ActivitySplashScreenBinding
 import dev.crsi.manders.providers.SharedPreferenceManager
 import dev.crsi.manders.ui.LoginActivity
@@ -48,8 +49,9 @@ class SplashScreenActivity : AppCompatActivity() {
                     startActivity(intent)
                 } else {
                     val intent = Intent(this, RegisterActivity::class.java)
-                    finish()
                     startActivity(intent)
+                    finish()
+
                 }
             }, timeSplash)
         }
