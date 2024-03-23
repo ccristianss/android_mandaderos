@@ -9,5 +9,5 @@ data class UserResponse(
     val dateupdate_user: String,
     val ismander_user: Boolean,
     val image_user: String?,
-    val account_id_account: Int
+    val account_id_account: Int,
 )
