@@ -28,6 +28,9 @@ interface ApiService {
         @Body request: AccountPasswordChangeRequest
     ): Call<AccountResponse>
 
+    @GET("user/")
+    fun getUsers(): Call<List<UserResponse>>
+
     @GET("user/{id}")
     fun getUserById(@Path("id") id: Int): Call<UserResponse>
 

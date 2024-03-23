@@ -38,16 +38,44 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        getPrefs()
+        getDataUsers()
         setListener()
     }
 
     private fun getPrefs() {
         id_account = sharedPref.getPref("id_account", 0) as Int
+        Log.d("getPrefs", "id_account:$id_account")
         id_user = sharedPref.getPref("id_user", 0) as Int
+        Log.d("getPrefs", "id_user:$id_user")
         if (id_user != 0) {
             GotoMain()
         }
+    }
+    private fun getDataUsers() {
+        apiService.getUsers().enqueue(object : Callback<List<UserResponse>> {
+            override fun onResponse(
+                call: Call<List<UserResponse>>,
+                response: Response<List<UserResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val usersList = response.body()!!
+                    val filteredUsers = usersList.filter { it.account_id_account == id_account }
+
+                    filteredUsers.forEach { user ->
+                        name = user.name_user
+                        lastname = user.lastname_user
+                        phone = user.phone_user
+                        savePrefers(user.id_user)
+                    }
+                    getPrefs()
+                }
+            }
+
+            override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     private fun setListener() {
@@ -60,7 +88,6 @@ class RegisterActivity : AppCompatActivity() {
                 registerUser(userRequest)
             }
         }
-
     }
 
     private fun registerUser(userRequest: UserRequest) {
