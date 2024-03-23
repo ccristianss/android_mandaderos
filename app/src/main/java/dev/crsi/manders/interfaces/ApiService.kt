@@ -10,6 +10,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiService {
@@ -24,5 +25,10 @@ interface ApiService {
 
     @POST("user/")
     fun createUser(@Body request: UserRequest): Call<UserResponse>
+
+    @PUT("user/{id}")
+    fun updateUser(@Body request: UserRequest): Call<UserResponse>
+
+
 
 }
