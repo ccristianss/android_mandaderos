@@ -91,6 +91,8 @@ class UpdateUserProfileActivity : AppCompatActivity() {
                 val phone_user = binding.editTextPhone.text.toString()
                 val userRequest = UserRequest(id_account, name_user, lastname_user, phone_user)
                 updateUserProfile(userRequest)
+
+
             }
         }
     }

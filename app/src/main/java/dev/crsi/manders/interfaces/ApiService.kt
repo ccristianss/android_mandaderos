@@ -7,6 +7,7 @@ import dev.crsi.manders.models.DetailRequestResponse
 import dev.crsi.manders.models.LoginRequest
 import dev.crsi.manders.models.LoginResponse
 import dev.crsi.manders.models.ManderRequest
+import dev.crsi.manders.models.ManderActiveRequest
 import dev.crsi.manders.models.ManderResponse
 import dev.crsi.manders.models.ServiceResponse
 import dev.crsi.manders.models.UserRequest
@@ -15,6 +16,7 @@ import dev.crsi.manders.ui.UpdateProfileManderActivity
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -62,5 +64,13 @@ interface ApiService {
 
 
 
+    @GET("mander/")
+    fun getManders(): Call<List<ManderResponse>>
 
+
+    @PATCH("mander/{id}/")
+    fun updateActiveMander(
+        @Path("id") id: Int,
+        @Body manderActiveRequest: ManderActiveRequest
+    ): Call<ManderResponse>
 }

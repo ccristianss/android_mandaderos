@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import dev.crsi.manders.R
 import dev.crsi.manders.databinding.ServicesItemBinding
 import dev.crsi.manders.models.ServiceResponse
@@ -29,6 +30,7 @@ class ServiceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun render(data: ServiceResponse) {
         binding.nameService.text = data.name_service
+        Picasso.get().load(data.image_service).into(binding.imageService)
     }
 
 }
