@@ -29,4 +29,5 @@
     <string name="guardar">Guardar</string>
     <string name="cancelar">Cancelar</string>
     <string name="mandados">MANDADOS</string>
+    <string name="list_manders">LIST MANDERS</string>
 </resources>
