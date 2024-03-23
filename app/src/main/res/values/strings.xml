@@ -14,9 +14,13 @@
     <string name="login">Ingresar</string>
     <string name="register">Registrarse</string>
     <string name="msj_empty_email">Por favor digite su Correo</string>
+    <string name="msj_empty_password">Por favor digite su contraseña</string>
     <string name="msj_empty_name">Complete su nombre de usuario</string>
     <string name="msj_empty_lastname">Complete su apellido</string>
     <string name="msj_empty_phone">Faltó el teléfono</string>
+    <string name="msj_min_length">Minimo 8 caracteres especiales y alfanumericos.</string>
+    <string name="msj_error_password">Contraseñas no coinciden.</string>
+    <string name="msj_error_old_password">Contraseña anterior no coincide.</string>
     <string name="name">Su nombre</string>
     <string name="save">Guardar</string>
     <string name="lastname">Su apellido</string>
