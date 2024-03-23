@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
             binding.editTextEmail.requestFocus()
             false
         } else if (binding.editTextPassword.text.toString().isEmpty()) {
-            Toast.makeText(this, "Por favor digite su Contraseña", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msj_empty_password), Toast.LENGTH_SHORT).show()
             binding.editTextPassword.requestFocus()
             false
         } else {

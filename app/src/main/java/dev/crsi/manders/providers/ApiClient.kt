@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    val apiURL ="https://manders.azurewebsites.net/"
+    val apiURL ="https://manders.azurewebsites.net/api/"
 
     val retrofit = Retrofit.Builder()
         .baseUrl(apiURL)
