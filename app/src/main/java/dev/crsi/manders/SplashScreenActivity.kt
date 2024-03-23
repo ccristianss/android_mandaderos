@@ -28,11 +28,11 @@ class SplashScreenActivity : AppCompatActivity() {
         sharedPref = SharedPreferenceManager(this)
         setContentView(binding.root)
 
-        //initUI()
+        initUI()
 
-        val intent = Intent(this, UpdateUserProfileActivity::class.java)
-        finish()
-        startActivity(intent)
+        //val intent = Intent(this, UpdateUserProfileActivity::class.java)
+        //finish()
+        //startActivity(intent)
     }
 
     private fun initUI() {
