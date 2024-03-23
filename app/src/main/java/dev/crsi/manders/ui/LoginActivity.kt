@@ -89,7 +89,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if (response.code() == 200) {
                         savePrefers(response.body()?.id_account)
-                        GotoMain()
+                        GotoRegister()
 
                     } else {
                         Toast.makeText(
@@ -120,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
         sharedPref.savePref("password_account", pass)
     }
 
-    private fun GotoMain() {
+    private fun GotoRegister() {
         val i = Intent(this, RegisterActivity::class.java)
         startActivity(i)
     }
@@ -141,7 +141,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if (response.code() == 201) {
                         savePrefers(response.body()?.id_account)
-                        GotoMain()
+                        GotoRegister()
 
                     } else {
                         Toast.makeText(
