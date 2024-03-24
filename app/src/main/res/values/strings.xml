@@ -21,6 +21,7 @@
     <string name="msj_min_length">Minimo 8 caracteres especiales y alfanumericos.</string>
     <string name="msj_error_password">Contraseñas no coinciden.</string>
     <string name="msj_error_old_password">Contraseña anterior no coincide.</string>
+    <string name="msj_error_change_password">Error Cambio de Contraseña.</string>
     <string name="name">Su nombre</string>
     <string name="save">Guardar</string>
     <string name="lastname">Su apellido</string>
@@ -29,4 +30,9 @@
     <string name="guardar">Guardar</string>
     <string name="cancelar">Cancelar</string>
     <string name="mandados">MANDADOS</string>
+    <string name="current_password">Contraseña actual</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="btn_change_password">Cambiar contraseña</string>
+    <string name="btn_back">Volver</string>
 </resources>
