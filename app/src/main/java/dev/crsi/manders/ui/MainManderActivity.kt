@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dev.crsi.manders.R
 import dev.crsi.manders.adapters.RequestManderAdapter
 import dev.crsi.manders.databinding.ActivityMainManderBinding
 import dev.crsi.manders.interfaces.ApiService
@@ -49,7 +50,7 @@ class MainManderActivity : AppCompatActivity() {
     }
 
     private fun setListener() {
-        binding.updateStatus.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchUpdateStatus.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if (isChecked != is_active_mander) {
                 val manderActiveRequest = ManderActiveRequest(isChecked)
@@ -75,7 +76,7 @@ class MainManderActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             this@MainManderActivity,
-                            "Error al Actualizar estado",
+                            getString(R.string.msj_error_update_status),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -106,10 +107,12 @@ class MainManderActivity : AppCompatActivity() {
                         id_mander = mander.id_mander
                         sharedPref.savePref("id_mander", id_mander)
                         is_active_mander = mander.isactive_mander
-                        binding.updateStatus.isActivated = mander.isactive_mander
                         //savePrefers(mander.id_user)
+                        Log.d("data", "isActive:$mander")
                     }
                     getPrefs()
+                    Log.d("data", "isActive:$is_active_mander")
+                    binding.switchUpdateStatus.isChecked = is_active_mander
                 }
             }
 

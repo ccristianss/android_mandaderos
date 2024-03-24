@@ -22,6 +22,7 @@
     <string name="msj_error_password">Contraseñas no coinciden.</string>
     <string name="msj_error_old_password">Contraseña anterior no coincide.</string>
     <string name="msj_error_change_password">Error Cambio de Contraseña.</string>
+    <string name="msj_error_update_status">Error al Actualizar estado.</string>
     <string name="name">Su nombre</string>
     <string name="save">Guardar</string>
     <string name="lastname">Su apellido</string>

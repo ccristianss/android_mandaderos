@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(LayoutInflater.from(this))
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         sharedPref = SharedPreferenceManager(this)
         setContentView(binding.root)
 
