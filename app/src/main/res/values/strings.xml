@@ -35,4 +35,8 @@
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="btn_change_password">Cambiar contraseña</string>
     <string name="btn_back">Volver</string>
+    <string name="setting">Configuraciones</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="text_request">Mandados Pendientes</string>
+    <string name="swich_status_mander">Estado</string>
 </resources>
