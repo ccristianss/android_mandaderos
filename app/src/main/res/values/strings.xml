@@ -40,4 +40,10 @@
     <string name="notifications">Notificaciones</string>
     <string name="text_request">Mandados Pendientes</string>
     <string name="swich_status_mander">Estado</string>
+    <string name="hint_mandado">Escribe detalladamente tu mandado aquí…</string>
+    <string name="btn_enviar">Enviar mandado</string>
+    <string name="msj_confirmacion_envio">¿Estás seguro de enviar este mandado?</string>
+    <string name="msj_envio_exitoso">Mandado enviado exitosamente, uno de nuestros Manders se comunicará contigo de inmediato!</string>
+
+
 </resources>

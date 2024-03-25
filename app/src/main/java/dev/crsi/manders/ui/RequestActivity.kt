@@ -3,7 +3,10 @@ package dev.crsi.manders.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import dev.crsi.manders.R
 import dev.crsi.manders.databinding.ActivityRequestBinding
 import dev.crsi.manders.providers.SharedPreferenceManager
 
@@ -26,6 +29,26 @@ class RequestActivity : AppCompatActivity() {
     private fun initUI() {
         getIntents()
         getPrefs()
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.buttonEnviar.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Confirmación de envío")
+                .setMessage(getString(R.string.msj_confirmacion_envio))
+                .setPositiveButton("Sí") { dialogInterface, i ->
+                    // Enviar el mandado
+                    // ...
+
+                    // Mostrar Toast de éxito
+                    Toast.makeText(this, R.string.msj_envio_exitoso, Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("No", null)
+                .show()
+        }
+
+
     }
 
     private fun getIntents() {
