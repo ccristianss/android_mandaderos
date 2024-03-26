@@ -37,8 +37,11 @@ class CreateUserProfileActivity : AppCompatActivity() {
 
     private fun initUI() {
         getPrefs()
-        //getDataUsers()
-        setListener()
+        if (id_account != 0) {
+            setListener()
+        } else {
+            gotoLoginActivity()
+        }
     }
 
     private fun setListener() {
@@ -86,34 +89,15 @@ class CreateUserProfileActivity : AppCompatActivity() {
         Log.d("getPrefs", "id_account:$id_account")
     }
 
-    private fun getDataUsers() {
-        apiService.getUsers().enqueue(object : Callback<List<UserResponse>> {
-            override fun onResponse(
-                call: Call<List<UserResponse>>,
-                response: Response<List<UserResponse>>
-            ) {
-                if (response.isSuccessful) {
-                    val usersList = response.body()!!
-                    val filteredUsers = usersList.filter { it.account_id_account == id_account }
-
-                    filteredUsers.forEach { user ->
-                        name = user.name_user
-                        lastname = user.lastname_user
-                        phone = user.phone_user
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-
     private fun gotoMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
+    }
+
+    private fun gotoLoginActivity() {
+        val i = Intent(this, LoginActivity::class.java)
+        startActivity(i)
         finish()
     }
 
@@ -136,12 +120,13 @@ class CreateUserProfileActivity : AppCompatActivity() {
     }
 
     fun savePrefers(userdata: UserResponse?) {
-        sharedPref.savePref("id_user", userdata?.id_user.toString())
-        sharedPref.savePref("image_user", userdata?.image_user.toString())
-        sharedPref.savePref("name_user", userdata?.name_user.toString())
-        sharedPref.savePref("lastname_user", userdata?.lastname_user.toString())
-        sharedPref.savePref("phone_user", userdata?.phone_user.toString())
-        sharedPref.savePref("ismander_user", userdata?.ismander_user to Boolean)
+        sharedPref.savePref("id_user", userdata?.id_user as Int)
+        sharedPref.savePref("id_account", userdata.account_id_account)
+        sharedPref.savePref("image_user", userdata.image_user.toString())
+        sharedPref.savePref("name_user", userdata.name_user)
+        sharedPref.savePref("lastname_user", userdata.lastname_user)
+        sharedPref.savePref("phone_user", userdata.phone_user)
+        sharedPref.savePref("ismander_user", userdata.ismander_user)
     }
 
     private fun showToast(message: String) {

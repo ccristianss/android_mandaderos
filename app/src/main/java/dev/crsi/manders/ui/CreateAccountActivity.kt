@@ -62,7 +62,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
                     if (response.code() == 201) {
                         savePrefers(response.body())
-                        gotoLoginActivity()
+                        gotoCreateUserProfileActivity()
 
                     } else {
                         showToast("Error de Crear Cuenta")
@@ -80,6 +80,12 @@ class CreateAccountActivity : AppCompatActivity() {
             })
 
 
+    }
+
+    private fun gotoCreateUserProfileActivity() {
+        val i = Intent(this, CreateUserProfileActivity::class.java)
+        startActivity(i)
+        finish()
     }
 
     private fun savePrefers(accountdata: AccountResponse?) {

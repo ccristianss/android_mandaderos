@@ -132,14 +132,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun savePrefers(userdata: UserResponse?) {
-        sharedPref.savePref("id_user", userdata?.id_user.toString())
-        sharedPref.savePref("image_user", userdata?.image_user.toString())
-        sharedPref.savePref("name_user", userdata?.name_user.toString())
-        sharedPref.savePref("lastname_user", userdata?.lastname_user.toString())
-        sharedPref.savePref("phone_user", userdata?.phone_user.toString())
-        sharedPref.savePref("ismander_user", userdata?.ismander_user to Boolean)
+        sharedPref.savePref("id_user", userdata?.id_user as Int)
+        sharedPref.savePref("image_user", userdata.image_user.toString())
+        sharedPref.savePref("name_user", userdata.name_user)
+        sharedPref.savePref("lastname_user", userdata.lastname_user)
+        sharedPref.savePref("phone_user", userdata.phone_user)
+        sharedPref.savePref("ismander_user", userdata.ismander_user)
     }
-
 
     private fun activateButtonLogin(b: Boolean) {
         binding.buttonLogin.isEnabled = b
