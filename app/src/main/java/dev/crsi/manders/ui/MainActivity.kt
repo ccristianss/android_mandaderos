@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         binding.btnMenu.setOnClickListener { view ->
             showPopupMenu(view)
         }
-
     }
 
     private fun getPrefs() {
@@ -81,9 +80,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<DetailRequestResponse>>, error: Throwable) {
-                Toast.makeText(
-                    this@MainActivity, "Error: ${error.message}", Toast.LENGTH_SHORT
-                ).show()
+                showToast("Error: ${error.message}")
             }
 
 
@@ -97,7 +94,6 @@ class MainActivity : AppCompatActivity() {
         requestAdapter = RequestAdapter(filteredRequest)
         rvRequest.adapter = requestAdapter
     }
-
 
     private fun getServices() {
         val apiService = ApiClient.retrofit.create(ApiService::class.java)
@@ -113,9 +109,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<ServiceResponse>>, error: Throwable) {
-                Toast.makeText(
-                    this@MainActivity, "Error: ${error.message}", Toast.LENGTH_SHORT
-                ).show()
+                showToast("Error: ${error.message}")
             }
 
 
@@ -158,7 +152,7 @@ class MainActivity : AppCompatActivity() {
         popupMenu.show()
     }
 
-
-
-
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }
