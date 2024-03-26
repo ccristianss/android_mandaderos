@@ -4,16 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.crsi.manders.R
 import dev.crsi.manders.databinding.ActivityLoginBinding
 import dev.crsi.manders.interfaces.ApiService
-import dev.crsi.manders.models.AccountRequest
-import dev.crsi.manders.models.AccountResponse
 import dev.crsi.manders.models.LoginRequest
 import dev.crsi.manders.models.LoginResponse
+import dev.crsi.manders.models.UserResponse
 import dev.crsi.manders.providers.ApiClient
 import dev.crsi.manders.providers.SharedPreferenceManager
 import retrofit2.Call
@@ -36,7 +34,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initUI()
-
     }
 
     private fun initUI() {
@@ -46,31 +43,25 @@ class LoginActivity : AppCompatActivity() {
     private fun setListener() {
         binding.buttonLogin.setOnClickListener {
             if (validateForm()) {
+                activateButtonLogin(false)
                 email = binding.editTextEmail.text.toString()
                 pass = binding.editTextPassword.text.toString()
                 val loginRequest = LoginRequest(email, pass)
-
-                getIdAccount(loginRequest)
+                loginAccount(loginRequest)
             }
         }
-        binding.buttonRegister.setOnClickListener {
-            if (validateForm()) {
-                email = binding.editTextEmail.text.toString()
-                pass = binding.editTextPassword.text.toString()
-                val accountRequest = AccountRequest(email, pass)
-
-                registerAccount(accountRequest)
-            }
+        binding.buttonCreateAccount.setOnClickListener {
+            gotoCreateAccountActivity()
         }
     }
 
     private fun validateForm(): Boolean {
         return if (binding.editTextEmail.text.toString().isEmpty()) {
-            Toast.makeText(this, getString(R.string.msj_empty_email), Toast.LENGTH_SHORT).show()
+            showToast(getString(R.string.msj_empty_email))
             binding.editTextEmail.requestFocus()
             false
         } else if (binding.editTextPassword.text.toString().isEmpty()) {
-            Toast.makeText(this, getString(R.string.msj_empty_password), Toast.LENGTH_SHORT).show()
+            showToast(getString(R.string.msj_empty_password))
             binding.editTextPassword.requestFocus()
             false
         } else {
@@ -78,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun getIdAccount(loginRequest: LoginRequest) {
+    private fun loginAccount(loginRequest: LoginRequest) {
         apiService.login(loginRequest)
             .enqueue(object : Callback<LoginResponse> {
                 // Manejar respuesta
@@ -88,80 +79,81 @@ class LoginActivity : AppCompatActivity() {
                 ) {
 
                     if (response.code() == 200) {
-                        savePrefers(response.body()?.id_account)
-                        GotoRegister()
-
+                        sharedPref.savePref("jwt", response.body()?.jwt.toString())
+                        getUserdata()
                     } else {
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Error de Autenticacion",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        activateButtonRegister()
+                        showToast("Error de Autenticacion")
+                        activateButtonLogin(true)
                     }
 
-                    Log.d("getIdAccountonResponse", "onResponse: ${response.body()?.id_account}")
+                    Log.d("getIdAccountonResponse", "onResponse: ${response.body()?.jwt}")
                     Log.d("getIdAccountonResponse", "onResponse: ${response.body()}")
                     Log.d("getIdAccountonResponse", "onResponse: $response")
+                    Log.d("getIdAccountonResponse", "onResponse: ${response.message()}")
+                    Log.d("getIdAccountonResponse", "onResponse: ${response.headers()}")
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-
                     Log.d("getIdAccountonFailure", "onResponse: $t")
+                    activateButtonLogin(true)
                 }
             })
     }
 
-    fun savePrefers(idAccount: Int?) {
-        if (idAccount != null) {
-            sharedPref.savePref("id_account", idAccount)
-        }
-        sharedPref.savePref("email_account", email)
-        sharedPref.savePref("password_account", pass)
-    }
-
-    private fun GotoRegister() {
-        val i = Intent(this, RegisterActivity::class.java)
+    private fun gotoMainActivity() {
+        val i = Intent(this, MainActivity::class.java)
         startActivity(i)
     }
 
-    private fun activateButtonRegister() {
-        binding.buttonRegister.visibility = View.VISIBLE
-    }
-
-
-    private fun registerAccount(accountRequest: AccountRequest) {
-        apiService.createAccount(accountRequest)
-            .enqueue(object : Callback<AccountResponse> {
-                // Manejar respuesta
+    private fun getUserdata() {
+        val jwt = sharedPref.getPref("jwt", "").toString()
+        apiService.getUserdata("jwt=$jwt")
+            .enqueue(object : Callback<UserResponse> {
                 override fun onResponse(
-                    call: Call<AccountResponse>,
-                    response: Response<AccountResponse>
+                    call: Call<UserResponse>,
+                    response: Response<UserResponse>
                 ) {
-
-                    if (response.code() == 201) {
-                        savePrefers(response.body()?.id_account)
-                        GotoRegister()
-
+                    if (response.isSuccessful) {
+                        savePrefers(response.body())
+                        gotoMainActivity()
                     } else {
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Error de Autenticacion",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showToast("Error de Autenticacion")
+                        activateButtonLogin(true)
                     }
-
-                    Log.d("registerAccountonRes", "onResponse: ${response.body()?.id_account}")
-                    Log.d("registerAccountonRes", "onResponse: ${response.body()}")
-                    Log.d("registerAccountonRes", "onResponse: $response")
+                    Log.d("getIdAccountonResponse", "onResponse: ${response.body()}")
+                    Log.d("getIdAccountonResponse", "onResponse: ${response.headers()}")
                 }
 
-                override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
-
-                    Log.d("registerAccountonFail", "onResponse: $t")
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    Log.e("getIdAccountonResponse", "Error en la llamada a la API", t)
+                    showToast("Error en la llamada a la API")
                 }
             })
-
-
     }
+
+    fun savePrefers(userdata: UserResponse?) {
+        sharedPref.savePref("id_user", userdata?.id_user.toString())
+        sharedPref.savePref("image_user", userdata?.image_user.toString())
+        sharedPref.savePref("name_user", userdata?.name_user.toString())
+        sharedPref.savePref("lastname_user", userdata?.lastname_user.toString())
+        sharedPref.savePref("phone_user", userdata?.phone_user.toString())
+        sharedPref.savePref("ismander_user", userdata?.ismander_user to Boolean)
+    }
+
+
+    private fun activateButtonLogin(b: Boolean) {
+        binding.buttonLogin.isEnabled = b
+    }
+
+
+    private fun gotoCreateAccountActivity() {
+        val i = Intent(this, CreateAccountActivity::class.java)
+        startActivity(i)
+        finish()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
 }

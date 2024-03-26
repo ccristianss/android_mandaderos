@@ -13,6 +13,7 @@
     <string name="password">Contraseña</string>
     <string name="login">Ingresar</string>
     <string name="register">Registrarse</string>
+    <string name="btn_not_account">¿no tienes cuenta? Registrate</string>
     <string name="msj_empty_email">Por favor digite su Correo</string>
     <string name="msj_empty_password">Por favor digite su contraseña</string>
     <string name="msj_empty_name">Complete su nombre de usuario</string>
@@ -44,6 +45,10 @@
     <string name="btn_enviar">Enviar mandado</string>
     <string name="msj_confirmacion_envio">¿Estás seguro de enviar este mandado?</string>
     <string name="msj_envio_exitoso">Mandado enviado exitosamente, uno de nuestros Manders se comunicará contigo de inmediato!</string>
+    <string name="txt_sign_in">Iniciar Sesion</string>
+    <string name="txt_create_account">CREAR NUEVA CUENTA</string>
+    <string name="btn_create_account">CREAR CUENTA</string>
+    <string name="btn_yes_account">¿ya tienes una cuenta? Ingresar</string>
 
 
 </resources>

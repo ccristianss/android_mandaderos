@@ -6,4 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".ui.CreateAccountActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_margin="@dimen/_48dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/manders" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8dp"
+        android:text="@string/txt_create_account"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8dp"
+        android:autofillHints="emailAddress"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/_8dp"
+        android:text="cristians_94@hotmail.com"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8dp"
+        android:autofillHints="password"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="@dimen/_8dp"
+        android:text="crsi"
+        android:textColorHint="#A1887F"
+        app:layout_constraintBottom_toTopOf="@+id/editTextConfirmPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <EditText
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8dp"
+        android:autofillHints="password"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:padding="@dimen/_8dp"
+        android:text="crsi"
+        android:textColorHint="#A1887F"
+        app:layout_constraintBottom_toTopOf="@+id/buttoncreateAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <Button
+        android:id="@+id/buttoncreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_48dp"
+        android:text="@string/btn_create_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        style="@style/Widget.AppCompat.Light.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_48dp"
+        android:text="@string/btn_yes_account"
+        android:textColor="@color/black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttoncreateAccount" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

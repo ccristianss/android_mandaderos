@@ -7,73 +7,7 @@
     tools:context=".ui.RegisterActivity">
 
 
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_48dp"
-        android:layout_marginHorizontal="@dimen/_8dp"
-        android:autofillHints="username"
-        android:hint="@string/name"
-        android:inputType="textPersonName"
-        android:padding="@dimen/_8dp"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="VisualLintTextFieldSize" />
 
-    <EditText
-        android:id="@+id/editTextLastName"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_48dp"
-        android:layout_marginHorizontal="@dimen/_8dp"
-        android:autofillHints="lastname"
-        android:hint="@string/lastname"
-        android:inputType="textPersonName"
-        android:padding="@dimen/_8dp"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName"
-        tools:ignore="VisualLintTextFieldSize" />
-
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_48dp"
-        android:layout_marginHorizontal="@dimen/_8dp"
-        android:autofillHints="phone"
-        android:hint="@string/phone"
-        android:inputType="phone"
-        android:maxLength="10"
-        android:padding="@dimen/_8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLastName"
-        tools:ignore="VisualLintTextFieldSize" />
-
-    <Button
-        android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8dp"
-        android:text="@string/save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="@dimen/_0dp"
-        android:layout_height="@dimen/_0dp"
-        android:layout_margin="@dimen/_48dp"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@+id/editTextName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/manders" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
