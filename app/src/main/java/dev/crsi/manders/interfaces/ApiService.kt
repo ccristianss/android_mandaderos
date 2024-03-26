@@ -67,8 +67,7 @@ interface ApiService {
     @GET("mander/")
     fun getManders(): Call<List<ManderResponse>>
 
-    @GET("mander/")
-    fun getManders(): Call<List<ManderResponse>>
+
 
 
     @PATCH("mander/{id}/")
