@@ -98,7 +98,7 @@ class UpdatePasswordActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             this@UpdatePasswordActivity,
-                            "Error cambio de contraseña",
+                            getString(R.string.msj_error_change_password),
                             Toast.LENGTH_SHORT
                         ).show()
                     }

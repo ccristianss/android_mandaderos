@@ -9,27 +9,32 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/btnSettings"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Settings" />
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@null"
+            android:contentDescription="@string/setting"
+            android:scaleType="centerInside"
+            android:src="@drawable/setting" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_weight="1"
-            android:scaleType="centerCrop"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
             android:src="@drawable/manders2" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnNotifications"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Notifications" />
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@null"
+            android:contentDescription="@string/notifications"
+            android:scaleType="centerInside"
+            android:src="@drawable/notifications" />
 
     </LinearLayout>
 
@@ -43,7 +48,7 @@
             android:id="@+id/textMandados"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mandados"
+            android:text="@string/text_request"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -56,10 +61,10 @@
     </LinearLayout>
 
     <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/updateStatus"
+        android:id="@+id/switchUpdateStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Estado" />
+        android:text="@string/swich_status_mander" />
 
 </LinearLayout>

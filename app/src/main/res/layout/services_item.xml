@@ -16,16 +16,17 @@
         <ImageView
             android:id="@+id/image_service"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:src="@drawable/manders2"
-            android:contentDescription="@string/app_name" />
+            android:layout_height="100dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/manders2" />
 
         <TextView
             android:id="@+id/name_service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="22sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
     </LinearLayout>

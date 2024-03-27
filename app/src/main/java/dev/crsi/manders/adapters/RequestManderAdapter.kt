@@ -9,7 +9,7 @@ import dev.crsi.manders.databinding.RequestManderItemBinding
 import dev.crsi.manders.models.DetailRequestResponse
 
 class RequestManderAdapter(private val listRequest: List<DetailRequestResponse>) :
-    RecyclerView.Adapter<RequestManderViewHolder>() {
+    RecyclerView.Adapter<RequestManderAdapter.RequestManderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestManderViewHolder {
         return RequestManderViewHolder(
@@ -22,14 +22,14 @@ class RequestManderAdapter(private val listRequest: List<DetailRequestResponse>)
     }
 
     override fun getItemCount(): Int = listRequest.size
-}
 
-class RequestManderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val binding = RequestManderItemBinding.bind(view)
 
-    fun render(data: DetailRequestResponse) {
-        binding.detailRequest.text = data.detail_request
+    class RequestManderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = RequestManderItemBinding.bind(view)
+
+        fun render(data: DetailRequestResponse) {
+            binding.detailRequest.text = data.detail_request
+        }
     }
-
 }
 

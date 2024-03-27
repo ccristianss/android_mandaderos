@@ -13,6 +13,7 @@
     <string name="password">Contraseña</string>
     <string name="login">Ingresar</string>
     <string name="register">Registrarse</string>
+    <string name="btn_not_account">¿no tienes cuenta? Registrate</string>
     <string name="msj_empty_email">Por favor digite su Correo</string>
     <string name="msj_empty_password">Por favor digite su contraseña</string>
     <string name="msj_empty_name">Complete su nombre de usuario</string>
@@ -21,6 +22,8 @@
     <string name="msj_min_length">Minimo 8 caracteres especiales y alfanumericos.</string>
     <string name="msj_error_password">Contraseñas no coinciden.</string>
     <string name="msj_error_old_password">Contraseña anterior no coincide.</string>
+    <string name="msj_error_change_password">Error Cambio de Contraseña.</string>
+    <string name="msj_error_update_status">Error al Actualizar estado.</string>
     <string name="name">Su nombre</string>
     <string name="save">Guardar</string>
     <string name="lastname">Su apellido</string>
@@ -30,4 +33,25 @@
     <string name="cancelar">Cancelar</string>
     <string name="mandados">MANDADOS</string>
     <string name="list_manders">LIST MANDERS</string>
+
+    <string name="current_password">Contraseña actual</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="btn_change_password">Cambiar contraseña</string>
+    <string name="btn_back">Volver</string>
+    <string name="setting">Configuraciones</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="text_request">Mandados Pendientes</string>
+    <string name="swich_status_mander">Estado</string>
+    <string name="hint_mandado">Escribe detalladamente tu mandado aquí…</string>
+    <string name="btn_enviar">Enviar mandado</string>
+    <string name="msj_confirmacion_envio">¿Estás seguro de enviar este mandado?</string>
+    <string name="msj_envio_exitoso">Mandado enviado exitosamente, uno de nuestros Manders se comunicará contigo de inmediato!</string>
+    <string name="txt_sign_in">Iniciar Sesion</string>
+    <string name="txt_create_account">CREAR NUEVA CUENTA</string>
+    <string name="btn_create_account">CREAR CUENTA</string>
+    <string name="btn_yes_account">¿ya tienes una cuenta? Ingresar</string>
+    <string name="update_mander">Actualizar mandadero</string>
+
+
 </resources>

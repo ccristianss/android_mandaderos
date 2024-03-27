@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/idOptionEditProfile"
+        android:title="Editar perfil" />
+    <item
+        android:id="@+id/idOptionChangePass"
+        android:title="Cambiar contraseña" />
+    <item
+        android:id="@+id/idOptionVehicle"
+        android:title="Vehiculo" />
+    <item
+        android:id="@+id/idOptionIamUser"
+        android:title="Soy usuario" />
+</menu>

@@ -1,12 +1,16 @@
 package dev.crsi.manders.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dev.crsi.manders.R
 import dev.crsi.manders.adapters.RequestManderAdapter
 import dev.crsi.manders.databinding.ActivityMainManderBinding
 import dev.crsi.manders.interfaces.ApiService
@@ -49,14 +53,38 @@ class MainManderActivity : AppCompatActivity() {
     }
 
     private fun setListener() {
-        binding.updateStatus.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchUpdateStatus.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if (isChecked != is_active_mander) {
                 val manderActiveRequest = ManderActiveRequest(isChecked)
                 updateStatus(manderActiveRequest)
             }
         }
+
+        binding.btnSettings.setOnClickListener { showMenuSettings(it) }
     }
+
+    private fun showMenuSettings(view: View) {
+        val popupMenu = PopupMenu(this, view)
+        popupMenu.inflate(R.menu.menu_options_settings)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.idOptionEditProfile -> {
+                    val intent = Intent(this, UpdateProfileManderActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                //other actions
+                R.id.idOptionChangePass->{
+                    true
+                }
+
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
 
     private fun updateStatus(checked: ManderActiveRequest) {
 
@@ -64,7 +92,7 @@ class MainManderActivity : AppCompatActivity() {
             .enqueue(object : Callback<ManderResponse> {
                 override fun onResponse(
                     call: Call<ManderResponse>,
-                    response: Response<ManderResponse>
+                    response: Response<ManderResponse>,
                 ) {
                     if (response.isSuccessful) {
 
@@ -75,7 +103,7 @@ class MainManderActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             this@MainManderActivity,
-                            "Error al Actualizar estado",
+                            getString(R.string.msj_error_update_status),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -96,7 +124,7 @@ class MainManderActivity : AppCompatActivity() {
         apiService.getManders().enqueue(object : Callback<List<ManderResponse>> {
             override fun onResponse(
                 call: Call<List<ManderResponse>>,
-                response: Response<List<ManderResponse>>
+                response: Response<List<ManderResponse>>,
             ) {
                 if (response.isSuccessful) {
                     val manderList = response.body()!!
@@ -106,10 +134,12 @@ class MainManderActivity : AppCompatActivity() {
                         id_mander = mander.id_mander
                         sharedPref.savePref("id_mander", id_mander)
                         is_active_mander = mander.isactive_mander
-                        binding.updateStatus.isActivated = mander.isactive_mander
                         //savePrefers(mander.id_user)
+                        Log.d("data", "isActive:$mander")
                     }
                     getPrefs()
+                    Log.d("data", "isActive:$is_active_mander")
+                    binding.switchUpdateStatus.isChecked = is_active_mander
                 }
             }
 
